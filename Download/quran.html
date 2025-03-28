@@ -21,7 +21,17 @@
 <body>
 
 <div id="app" class="container mt-4">
+    <!-- Tombol Kembali -->
+    <button class="btn btn-primary mb-3" onclick="location.href='../index.html';">
+        <i class="fas fa-arrow-left"></i> Kembali
+    </button>
+
     <h2 class="text-center mb-4">📖 Al-Qur'an Online</h2>
+    
+    <!-- Input Pencarian -->
+    <div class="mb-3">
+        <input type="text" class="form-control" v-model="searchQuery" placeholder="Cari Surah...">
+    </div>
     
     <!-- Daftar Surah -->
     <table class="table table-striped">
@@ -35,7 +45,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="surah in surahList" :key="surah.nomor">
+            <tr v-for="surah in filteredSurahList" :key="surah.nomor">
                 <td>{{ surah.nomor }}</td>
                 <td>{{ surah.nama_latin }}</td>
                 <td>{{ surah.arti }}</td>
@@ -83,13 +93,21 @@
         data: {
             surahList: [],
             detailSurah: {},
-            showModal: false
+            showModal: false,
+            searchQuery: ""
+        },
+        computed: {
+            filteredSurahList() {
+                return this.surahList.filter(surah => 
+                    surah.nama_latin.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                    surah.arti.toLowerCase().includes(this.searchQuery.toLowerCase())
+                );
+            }
         },
         mounted() {
             this.getSurahList();
         },
         methods: {
-            // Mengambil daftar surah
             getSurahList() {
                 axios.get("https://quran-api.santrikoding.com/api/surah")
                     .then(response => {
@@ -99,7 +117,6 @@
                         console.error("Error fetching surah list:", error);
                     });
             },
-            // Mengambil detail surah
             getSurahDetail(nomor) {
                 axios.get(`https://quran-api.santrikoding.com/api/surah/${nomor}`)
                     .then(response => {
@@ -110,7 +127,6 @@
                         console.error("Error fetching surah details:", error);
                     });
             },
-            // Menutup modal
             closeModal() {
                 this.showModal = false;
             }
