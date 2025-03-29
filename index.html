@@ -457,22 +457,6 @@ body{
             width: 40px;
             height: 40px;
         }
-
-        /* Tombol Tema Hijau/Silver di pojok kiri bawah */
-        .theme-toggle-btn {
-            position: fixed;
-            left: 15px;
-            bottom: 15px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .theme-toggle-btn img {
-            width: 40px;
-            height: 40px;
-        }
     </style>
 </head>
 <body>
@@ -499,19 +483,12 @@ body{
         <img id="mode-icon" src="https://files.catbox.moe/9revab.png" alt="Mode">
     </button>
 
-    <!-- Tombol Pengganti Hijau/Silver -->
-    <button class="theme-toggle-btn" onclick="toggleTheme()">
-        <img id="theme-icon" src="https://cdn-icons-png.flaticon.com/512/724/724927.png" alt="Hijau">
-    </button>
-
     <script>
         let index = 0;
         const slider = document.getElementById('slider');
         const slides = document.querySelectorAll(".slider-wrapper img");
         const totalSlides = slides.length;
         const modeIcon = document.getElementById("mode-icon");
-        const themeIcon = document.getElementById("theme-icon");
-        let isGreen = true;
 
         function showSlide() {
             let translateX = -index * 100;
@@ -541,20 +518,6 @@ body{
                 body.style.color = "white";
                 modeIcon.src = "https://cdn-icons-png.flaticon.com/512/831/831682.png"; // Bulan
             }
-        }
-
-        function toggleTheme() {
-            let body = document.body;
-            if (isGreen) {
-                body.style.backgroundColor = "silver";
-                body.style.color = "black";
-                themeIcon.src = "https://files.catbox.moe/uyqvbu.png"; // Gambar untuk silver
-            } else {
-                body.style.backgroundColor = "green";
-                body.style.color = "white";
-                themeIcon.src = "https://files.catbox.moe/ioo2yt.png"; // Gambar untuk hijau
-            }
-            isGreen = !isGreen;
         }
     </script>
 
@@ -690,14 +653,6 @@ window.onclick = function(event) {
   }
 }
 </script>
-
-
-
-
-
-
-
-        
   
     </span>
     </center>
@@ -759,7 +714,6 @@ window.onclick = function(event) {
 <button class="button"><a href="sosmed.html"><img class="image" src="https://files.catbox.moe/4ge3if.jpg"></a>Suntik Sosmed</button></div></div>
 
 
-
 <!---BAGIAN INTERNET--->
 <div class="dropdown">
 <button class="button">
@@ -769,6 +723,9 @@ window.onclick = function(event) {
 <center><p class="tittle">Customer Service</p>
 <center>
 <button class="button"><a href="index-sc.html"><img class="image" src="https://files.catbox.moe/nkte6v.jpg"></a>Customer Service</button></div></div>
+<!--PROMO-->
+       <div class="dropdown">
+<button class="button"><a href="Topup/awal.html"><img class="image" src="https://files.catbox.moe/3xf22l.png"></a>TopUp Games</button>
 
 <div class="dropdown">
 <button class="button"><a onclick="openNav()"><img class="image" src="https://files.catbox.moe/ptf0a2.jpg"></a>Aplikasi Premium</button></div>
@@ -815,20 +772,15 @@ window.onclick = function(event) {
 
 <!--PROMO-->
        <div class="dropdown">
+<button class="button"><a href="Download/quran.html"><img class="image" src="https://files.catbox.moe/m19xdh.jpeg"></a>Baca Al-Quran</button>
+
+<!--PROMO-->
+       <div class="dropdown">
 <button class="button"><a href="Ai/ryuu.html"><img class="image" src="https://files.catbox.moe/dg04yo.jpg"></a>Ryuuuu-Ai V.1</button>
 
 <!--PROMO-->
        <div class="dropdown">
-<button class="button"><a href="Api/Gemini/index.html"><img class="image" src="https://files.catbox.moe/dg04yo.jpg"></a>Ryuuuu-A-i V.2</button>
-<!--PROMO-->
-       <div class="dropdown">
-<button class="button"><a href="Download/quran.html"><img class="image" src="https://files.catbox.moe/m19xdh.jpeg"></a>Baca Al-Quran</button></div></div>
-
-
-<!--PROMO-->
-       <div class="dropdown">
-<button class="button"><a href="Download/ryuu.html"><img class="image" src="https://files.catbox.moe/dg04yo.jpg"></a>Bot Ryuuuu A-i</button>
-
+<button class="button"><a href="gemini.html"><img class="image" src="https://files.catbox.moe/dg04yo.jpg"></a>Ryuuuu-A-i V.2</button></div></div>
 
 <style>
 
