@@ -81,8 +81,8 @@
     </style>
 </head>
 <body>
-    <video autoplay muted loop class="video-background">
-        <source src="https://www.videezy.com/download/1091935" type="video/mp4">
+    <video autoplay loop class="video-background" id="bg-video">
+        <source src="https://files.catbox.moe/9jmj35.mp4" type="video/mp4">
         Browser Anda tidak mendukung tag video.
     </video>
     
@@ -98,28 +98,31 @@
             <img src="https://files.catbox.moe/ijih22.jpg" alt="PUBG Mobile">
         </a>
     </div>
-    
+
     <div class="buttons">
         <a href="index.html" class="button">Kembali ke Home</a>
-        <button class="button" onclick="toggleMusic()">🔊 Nyalakan Musik</button>
+        <button id="music-button" class="button" onclick="toggleMusic()">🔇 Matikan Musik</button>
     </div>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
-    </audio>
-    
     <script>
-        let musicPlaying = false;
+        const video = document.getElementById("bg-video");
+        const musicButton = document.getElementById("music-button");
+        let musicPlaying = true;
+
+        video.volume = 0.5; // Volume setengah agar tidak terlalu keras
+        video.muted = false; // Pastikan video tidak dimute saat mulai
+
         function toggleMusic() {
-            const audio = document.getElementById("bg-music");
             if (musicPlaying) {
-                audio.pause();
-                musicPlaying = false;
+                video.muted = true;
+                musicButton.innerHTML = "🔊 Nyalakan Musik";
             } else {
-                audio.play();
-                musicPlaying = true;
+                video.muted = false;
+                musicButton.innerHTML = "🔇 Matikan Musik";
             }
+            musicPlaying = !musicPlaying;
         }
     </script>
+
 </body>
 </html>
