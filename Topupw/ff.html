@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            width: 48%;
+            padding: 10px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #673ab7;
+            color: white;
+        }
+
+        .price-list {
+            display: none;
+        }
+
+        .price-list.active {
+            display: block !important;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .item h2 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .item p {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .item .price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #673ab7;
+        }
+
+        .item:hover {
+            background: #f1f1f1;
+            transition: 0.3s;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            text-align: center;
+            background: #ff5252;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #d32f2f;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://files.catbox.moe/bw5psf.jpg" alt="Free Fire Logo" class="logo">
+    <div class="title">Free Fire 🔥</div>
+    <div class="subtitle">Pilih jumlah diamond atau membership</div>
+
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchTab('diamond')">Diamond</button>
+        <button class="tab-btn" onclick="switchTab('membership')">Membership</button>
+    </div>
+
+    <!-- Diamond Section -->
+
+<div id="diamond" class="price-list active">
+    <div class="item" onclick="redirectToWA('FF5')">
+        <div>
+            <h2>5 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp1.259</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF12')">
+        <div>
+            <h2>12 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp2.648</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF15')">
+        <div>
+            <h2>15 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp3.716</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF20')">
+        <div>
+            <h2>20 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp4.704</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF30')">
+        <div>
+            <h2>30 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp7.221</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF40')">
+        <div>
+            <h2>40 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp9.489</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF55')">
+        <div>
+            <h2>55 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp10.613</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF70')">
+        <div>
+            <h2>70 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp12.668</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF80')">
+        <div>
+            <h2>80 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp15.095</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF90')">
+        <div>
+            <h2>90 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp17.585</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF100')">
+        <div>
+            <h2>100 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp18.701</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF120')">
+        <div>
+            <h2>120 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp22.296</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF130')">
+        <div>
+            <h2>130 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp24.519</div>
+    </div>
+
+    <div class="item" onclick="redirectToWA('FF140')">
+        <div>
+            <h2>130 Diamond 💎</h2>
+            <p>Free Fire</p>
+        </div>
+        <div class="price">Rp25.155</div>
+    </div>
+</div>
+
+    <!-- Membership Section -->
+    <div id="membership" class="price-list">
+        <div class="item" onclick="redirectToWA('Membership1')">
+            <div>
+                <h2>💳 Membership Level Up Pass</h2>
+                <p>Free Fire</p>
+            </div>
+            <div class="price">Rp19.829</div>
+        </div>
+
+        <div class="item" onclick="redirectToWA('Membership2')">
+            <div>
+                <h2>💳 Membership Mingguan + 50 Diamond</h2>
+                <p>Free Fire</p>
+            </div>
+            <div class="price">Rp38.862</div>
+        </div>
+    </div>
+
+    <!-- Tombol Back -->
+    <a href="menu_awal.html" class="back-button">⬅ Kembali ke Menu</a>
+
+    <!-- Copyright -->
+    <div class="copyright">© 2025 Xiao Market</div>
+</div>
+
+<script>
+    function switchTab(tabName) {
+        console.log("Switching to:", tabName); // Debugging
+        
+        // Hilangkan active dari semua price-list
+        document.querySelectorAll('.price-list').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Tambahkan active ke tab yang diklik
+        document.getElementById(tabName).classList.add('active');
+
+        // Hilangkan active dari semua tombol
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Tambahkan active ke tombol yang sesuai
+        if (tabName === 'diamond') {
+            document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+        } else {
+            document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+        }
+    }
+
+    function redirectToWA(product) {
+        window.location.href = `https://wa.me/79969732053?text=topup+${product}`;
+    }
+</script>
+
+</body>
+</html>
