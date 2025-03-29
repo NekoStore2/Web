@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirim Email</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://cloudkuimages.com/uploads/images/67e6501a1ea15.jpg" type="image/jpeg">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>📩 Kirim Email</h2>
+            <form id="emailForm">
+                <div class="form-group">
+                    <label for="to">Kepada (pisahkan dengan koma)</label>
+                    <textarea id="to" name="to" placeholder="Masukkan hingga 5 email penerima" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subjek</label>
+                    <input type="text" id="subject" name="subject" placeholder="Masukkan subjek email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Pesan</label>
+                    <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                </div>
+                <button type="submit">
+                    <span id="buttonText">Kirim Email</span>
+                    <span id="buttonLoader" class="loader"></span>
+                </button>
+            </form>
+            <p id="statusMessage"></p>
+        </div>
+        <p style="text-align: center; margin-top: 20px;">Note: Jika pesan tidak ada di bagian utama Gmail kamu, maka mungkin pesan tersebut terkirim ke spam</p>
+        <img class="spam-img" src="https://files.catbox.moe/9py14p.jpg" alt="Spam_Email">
+        <div class="footer"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailForm = document.getElementById('emailForm');
+            const statusMessage = document.getElementById('statusMessage');
+            const buttonText = document.getElementById('buttonText');
+            const buttonLoader = document.getElementById('buttonLoader');
+            
+            emailForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                const toEmails = document.getElementById('to').value.split(',').map(email => email.trim());
+                if (toEmails.length > 5) {
+                    statusMessage.innerHTML = "⚠️ Maksimal 5 penerima";
+                    statusMessage.style.color = "#f44336";
+                    return;
+                }
+                
+                const formData = {
+                    to: toEmails,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+
+                buttonText.textContent = "Mengirim...";
+                buttonLoader.style.display = "inline-block";
+                statusMessage.innerHTML = '<span class="loading"></span> Sedang mengirim email...';
+                statusMessage.style.color = "#4caf50";
+                emailForm.querySelector('button').disabled = true;
+
+                try {
+                    const response = await fetch('/send-email', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        statusMessage.innerHTML = "✅ Email berhasil dikirim ke semua penerima!";
+                        statusMessage.style.color = "#4caf50";
+                        emailForm.reset();
+                    } else {
+                        statusMessage.innerHTML = "❌ " + (result.message || "Gagal mengirim email");
+                        statusMessage.style.color = "#f44336";
+                    }
+                } catch (error) {
+                    statusMessage.innerHTML = "⚠️ Terjadi kesalahan jaringan!";
+                    statusMessage.style.color = "#f44336";
+                    console.error('Error:', error);
+                } finally {
+                    buttonText.textContent = "Kirim Email";
+                    buttonLoader.style.display = "none";
+                    emailForm.querySelector('button').disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
