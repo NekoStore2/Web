@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake KTP Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      color: #333;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0d6efd;
+    }
+
+    textarea, button {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0b5ed7;
+    }
+
+    #result {
+      background: white;
+      border: 2px solid #0d6efd;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      font-size: 0.85rem;
+      overflow-wrap: break-word;
+    }
+
+    img {
+      margin-top: 12px;
+      max-width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .contoh-box {
+      font-size: 0.6rem;
+      background: #e9ecef;
+      border-left: 4px solid #0d6efd;
+      padding: 8px;
+      margin-top: -10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+
+    .contoh-box code {
+      font-family: monospace;
+      color: #0d6efd;
+      cursor: pointer;
+    }
+
+    .contoh-box code:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fake KTP Generator</h1>
+  <form id="ktpForm">
+    <textarea id="dataInput" rows="10" placeholder="Masukkan data dipisahkan dengan | (18 parameter)"></textarea>
+    <div class="contoh-box" id="contohBox">
+      Contoh penggunaan (klik untuk mengisi):<br>
+      <code id="isiContoh">JEPANG|TOKYO|327XXXXXXXXXXXXX|RyuuXiao|JEPANG,07-12-2007|LAKI-LAKI|A|JL. TOKYO NO. 123|05/08|OKINAWA|PASAR GELAP|ISLAM|SUDAH MENIKAH|NGODING SIMPLE|WNI|SEUMUR HIDUP|25-09-2023|https://qu.ax/PfBXJ.jpg</code>
+    </div>
+    <button type="submit">Generate KTP</button>
+  </form>
+  <div id="result" style="display:none;"></div>
+
+  <script>
+    document.getElementById('isiContoh').addEventListener('click', () => {
+      const contoh = `JEPANG|TOKYO|327XXXXXXXXXXXXX|RyuuXiao|JEPANG,07-12-2007|LAKI-LAKI|A|JL. TOKYO NO. 123|05/08|OKINAWA|PASAR GELAP|ISLAM|SUDAH MENIKAH|NGODING SIMPLE|WNI|SEUMUR HIDUP|25-09-2023|https://qu.ax/PfBXJ.jpg`;
+      document.getElementById('dataInput').value = contoh;
+    });
+
+    document.getElementById('ktpForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const input = document.getElementById('dataInput').value.trim();
+      const result = document.getElementById('result');
+      const contohBox = document.getElementById('contohBox');
+      result.style.display = 'none';
+
+      const fields = input.split('|').map(v => v.trim());
+      if (fields.length !== 18) {
+        result.innerHTML = '<p style="color:red;">Masukkan tepat 18 parameter yang dipisahkan oleh "|"</p>';
+        result.style.display = 'block';
+        return;
+      }
+
+      const [
+        provinsi, kota, nik, nama, ttl, jk, goldar, alamat, rtRw, kelDesa,
+        kecamatan, agama, status, pekerjaan, kewarganegaraan, masaBerlaku, terbuat, pasPhoto
+      ] = fields;
+
+      const apiUrl = `https://fastrestapis.fasturl.cloud/maker/ktp?provinsi=${encodeURIComponent(provinsi)}&kota=${encodeURIComponent(kota)}&nik=${encodeURIComponent(nik)}&nama=${encodeURIComponent(nama)}&ttl=${encodeURIComponent(ttl)}&jenisKelamin=${encodeURIComponent(jk)}&golonganDarah=${encodeURIComponent(goldar)}&alamat=${encodeURIComponent(alamat)}&rtRw=${encodeURIComponent(rtRw)}&kelDesa=${encodeURIComponent(kelDesa)}&kecamatan=${encodeURIComponent(kecamatan)}&agama=${encodeURIComponent(agama)}&status=${encodeURIComponent(status)}&pekerjaan=${encodeURIComponent(pekerjaan)}&kewarganegaraan=${encodeURIComponent(kewarganegaraan)}&masaBerlaku=${encodeURIComponent(masaBerlaku)}&terbuat=${encodeURIComponent(terbuat)}&pasPhoto=${encodeURIComponent(pasPhoto)}`;
+
+      result.innerHTML = `<p style="color: #555;">Memuat KTP...</p>`;
+      result.style.display = 'block';
+      contohBox.style.display = 'none';
+
+      try {
+        const img = document.createElement('img');
+        img.src = apiUrl;
+        img.alt = "Hasil KTP";
+        img.onload = () => {
+          result.innerHTML = `<h3>✅ KTP Berhasil Dibuat</h3>
+            <p><strong>Nama:</strong> ${nama}<br>
+            <strong>NIK:</strong> ${nik}<br>
+            <strong>TTL:</strong> ${ttl}<br>
+            <strong>Provinsi:</strong> ${provinsi}<br>
+            <strong>Kota:</strong> ${kota}</p>`;
+          result.appendChild(img);
+        };
+        img.onerror = () => {
+          result.innerHTML = '<p style="color:red;">Gagal memuat gambar KTP. Cek data dan link pas foto.</p>';
+        };
+      } catch (error) {
+        result.innerHTML = '<p style="color:red;">Terjadi kesalahan saat membuat KTP.</p>';
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>
